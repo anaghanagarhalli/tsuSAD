@@ -1,0 +1,42 @@
+import pandas as pd
+
+# Step 1: Load your Excel file (replace with your actual path)
+file_name = '21418_20090709to20110713_qc.csv'
+df = pd.read_excel(file_name)
+
+# Step 2: Clean column names
+# (same as before)
+df.columns = df.columns.str.strip()
+print('Columns in file:', df.columns.tolist())
+
+# Step 3: Standardize names
+# (same logic as before)
+datetime_col = None
+signal_col = None
+for col in df.columns:
+    if 'datetime' in col.lower():
+        datetime_col = col
+    if 'residual' in col.lower() or 'tsunami' in col.lower() or 'pressure' in col.lower():
+        signal_col = col
+if datetime_col is None or signal_col is None:
+    raise ValueError('Could not detect datetime or signal column. Please check column names above.')
+
+# Step 4: Keep only necessary columns
+df = df[[datetime_col, signal_col]]
+df.columns = ['Datetime', 'Tsunami_Signal']
+
+# Step 5: Convert datetime
+df['Datetime'] = pd.to_datetime(df['Datetime'], errors='coerce')
+df.dropna(subset=['Datetime'], inplace=True)
+
+# Step 6: Set index
+df.set_index('Datetime', inplace=True)
+
+# Step 7: Filter for 2011 event at station 21418
+# Example: event_date = '2011-03-11' (Tohoku earthquake)
+event_date = '2011-03-11'
+df_filtered = df.loc[event_date]
+
+print(f'\nPrepared df_filtered for {event_date}:')
+print(df_filtered.head())
+print(df_filtered.info())

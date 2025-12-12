@@ -1,0 +1,2 @@
+event_mag,event_depth,dist_epicenter_to_coast,azimuth_epicenter_to_buoy,max_amp,min_amp,mean_amp,std_amp,skew_amp,kurt_amp,peak_to_peak,rms_amp,onset_time_relative,rise_time,max_sta_lta,time_of_max_sta_lta,sta_lta_triggered,dominant_period,spectral_centroid
+8.8,35.0,20000,45.0,0.3042411628406522,-0.27009739833065277,-7.021912028538118e-07,0.024503365258087266,0.6009197999161657,62.250923190810255,0.574338561171305,0.024503365268148586,13185.0,,2827.6642563939076,1155.0,1,57.70022883295194,0.01881719486945108
